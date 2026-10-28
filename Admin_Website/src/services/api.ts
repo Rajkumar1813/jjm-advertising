@@ -1,7 +1,10 @@
 import axios from 'axios';
 
 export const PRODUCTION_BACKEND_URL =
-  (import.meta as any).env?.VITE_API_URL || 'https://jjm-advertising.onrender.com';
+  ((import.meta as any).env?.VITE_API_URL || 'https://jjm-advertising-i1m0.onrender.com')
+    .toString()
+    .trim()
+    .replace(/\/+$/, '');
 
 export const getActiveBackendUrl = (): string => {
   return PRODUCTION_BACKEND_URL;

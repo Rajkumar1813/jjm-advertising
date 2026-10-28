@@ -96,6 +96,14 @@ export const io = new SocketIOServer(server, {
 });
 
 app.disable('x-powered-by'); // Don't leak Express version
+
+// Normalize repeated leading slashes (e.g. //api/media -> /api/media)
+app.use((req: Request, _res: Response, next: NextFunction) => {
+  if (req.url.startsWith('//')) {
+    req.url = req.url.replace(/^\/+/, '/');
+  }
+  next();
+});
 app.use(cors(corsOptions));
 // Handle preflight OPTIONS requests across all routes
 app.options('*', cors(corsOptions));
