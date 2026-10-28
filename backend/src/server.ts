@@ -202,7 +202,7 @@ app.use(
   '/uploads',
   cors(),
   express.static(path.join(__dirname, '../uploads'), {
-    setHeaders: (res) => {
+    setHeaders: (res: any) => {
       res.setHeader('Access-Control-Allow-Origin', '*');
     },
   })
@@ -236,7 +236,7 @@ app.use('/api/emergency', requireAdminAuth, emergencyRouter);
 
 
 // Health check endpoint
-app.get('/api/health', (req, res) => {
+app.get('/api/health', (req: Request, res: Response) => {
   res.json({
     status: 'ok',
     version: '2.0.0-PROD',
